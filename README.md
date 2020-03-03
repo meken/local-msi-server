@@ -62,7 +62,7 @@ local MSI server is running on localhost and the default port, you can use the f
 these variables
 
 ```bash
-MSI_ENDPOINT=localhost:1509
+MSI_ENDPOINT=http://localhost:1509/msi/token
 MSI_SECRET=foobar  # the value doesn't matter, it could be empty as well
 ```
 
