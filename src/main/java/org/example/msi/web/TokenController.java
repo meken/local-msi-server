@@ -38,7 +38,10 @@ public class TokenController {
 	@GetMapping("/msi/token")
 	public ResponseEntity<Token> token(@RequestParam String resource) {
 		try {
-			return ResponseEntity.ok(tokenService.getToken(resource));
+			logger.debug("Requested a token for resource {}", resource);
+			Token token = tokenService.getToken(resource);
+			logger.debug("Successfully retrieved the token");
+			return ResponseEntity.ok(token);
 		} catch (TokenRetrievalException e) {
 			logger.error("Error while retrieving token", e);
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
