@@ -15,12 +15,12 @@ public class TokenService {
     @Autowired
     private ConfidentialClientApplication app;
 
-    public Token getToken(String resource) throws TokenRetrievalException {
+    public Token getToken(String resource, String apiVersion) throws TokenRetrievalException {
         ClientCredentialParameters params = ClientCredentialParameters.builder(
                 Collections.singleton(String.format("%s/.default", resource))).build();
         CompletableFuture<IAuthenticationResult> future = app.acquireToken(params);
         try {
-            return new Token(future.get());
+            return new Token(future.get(), resource, apiVersion);
         } catch (InterruptedException | ExecutionException e) {
             throw new TokenRetrievalException(e);
         }
